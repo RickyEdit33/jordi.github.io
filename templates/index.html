@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Analysis</title>
+    <script>
+        async function analyze() {
+            let username = document.getElementById("username").value;
+            let gameType = document.getElementById("gameType").value;
+            let maxGames = document.getElementById("maxGames").value;
+            
+            let response = await fetch("/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `username=${username}&game_type=${gameType}&max_games=${maxGames}`
+            });
+
+            let result = await response.json();
+            document.getElementById("result").innerText = result.message;
+        }
+    </script>
+</head>
+<body>
+    <h1>Chess Analysis</h1>
+    <label>Username: <input type="text" id="username"></label><br>
+    <label>Game Type: 
+        <select id="gameType">
+            <option value="rapid">Rapid</option>
+            <option value="blitz">Blitz</option>
+            <option value="bullet">Bullet</option>
+        </select>
+    </label><br>
+    <label>Max Games: <input type="number" id="maxGames" value="50"></label><br>
+    <button onclick="analyze()">Analyze</button>
+    <pre id="result"></pre>
+</body>
+</html>

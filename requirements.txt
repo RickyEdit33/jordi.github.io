@@ -1,0 +1,2 @@
+git config --global user.name "RickyEdit33"
+git config --global user.email "amesones.blanco@icloud.com"
